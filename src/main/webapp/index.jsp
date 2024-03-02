@@ -4,60 +4,65 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style type="text/css">
-        *, *::before, *::after { box-sizing:border-box }
         body {
-            margin:0;
-            background:Black;
+            margin: auto;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: auto;
+            background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+            animation: gradient 15s ease infinite;
+            background-size: 400% 400%;
+            background-attachment: fixed;
         }
-
-        .shape {
-            margin:0 auto;
-            aspect-ratio: 1;
-            position:relative;
-
-            --width: 100%;
-            --scale: 1;
-            --opacity: 0.66;
-            --top: 0;
-            --left:0;
-            --path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-            --background: linear-gradient( hotpink, red, orange, yellow, hotpink);
-
-            --offset: 0deg;
-            --speed: 8000ms;
-
-            clip-path: var(--path);
-            background: var(--background);
-            scale: var(--scale);
-            opacity: var(--opacity);
-            width:var(--width);
-            top:var(--top);
-            left:var(--left);
-            rotate: var(--offset);
-
-            mix-blend-mode: difference;
-
-            animation: turn var(--speed) linear forwards infinite;
-
-            @keyframes turn {
-                to {
-                    rotate: calc( var(--offset) + 1turn);
-                }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 0%;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0% 0%;
             }
         }
-
-        .blur-container {
-
-            --blur: 40px;
-            filter: blur( var(--blur) );
-            height:100vh;
-            width:100%;
-            display: grid;
-            > * {
-                grid-column: 1 / -1;
-                grid-row: 1 / -1;
+        .wave {
+            background: rgb(255 255 255 / 25%);
+            border-radius: 1000% 1000% 0 0;
+            position: fixed;
+            width: 200%;
+            height: 12em;
+            animation: wave 10s -3s linear infinite;
+            transform: translate3d(0, 0, 0);
+            opacity: 0.8;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+        .wave:nth-of-type(2) {
+            bottom: -1.25em;
+            animation: wave 18s linear reverse infinite;
+            opacity: 0.8;
+        }
+        .wave:nth-of-type(3) {
+            bottom: -2.5em;
+            animation: wave 20s -1s reverse infinite;
+            opacity: 0.9;
+        }
+        @keyframes wave {
+            2% {
+                transform: translateX(1%);
             }
-            overflow:hidden;
+            25% {
+                transform: translateX(-25%);
+            }
+            50% {
+                transform: translateX(-50%);
+            }
+            75% {
+                transform: translateX(-25%);
+            }
+            100% {
+                transform: translateX(1%);
+            }
         }
         .top{
             display: flex;
@@ -74,18 +79,10 @@
 <hr>
 <a style="color:white;" href="/people">People page</a>
 <a style="color: white" href="/books">Books page</a>
-<div class="blur-container"
-     style="--blur:12vw;">
-
-    <div class="shape"
-         style="--path:polygon(50.9% 37.2%, 43.5% 34.7%, 33.6% 26.1%, 39.2% 10.8%, 26.2% 0.0%, 4.8% 6.4%, 0.0% 30.4%, 20.7% 37.2%, 33.4% 26.3%, 43.2% 34.9%, 45.0% 35.6%, 43.6% 46.4%, 37.8% 59.5%, 21.8% 63.2%, 11.7% 76.1%, 22.9% 91.3%, 47.4% 91.3%, 54.0% 79.0%, 38.0% 59.6%, 43.9% 46.4%, 45.2% 35.5%, 50.9% 37.6%, 56.1% 36.8%, 59.8% 47.6%, 70.3% 61.9%, 87.7% 56.0%, 96.4% 37.4%, 88.6% 15.1%, 63.7% 16.7%, 55.2% 33.6%, 55.9% 36.6%, 50.9% 37.2%);"></div>
-
-    <div class="shape"
-         style="--path:polygon(50.9% 37.2%, 43.5% 34.7%, 33.6% 26.1%, 39.2% 10.8%, 26.2% 0.0%, 4.8% 6.4%, 0.0% 30.4%, 20.7% 37.2%, 33.4% 26.3%, 43.2% 34.9%, 45.0% 35.6%, 43.6% 46.4%, 37.8% 59.5%, 21.8% 63.2%, 11.7% 76.1%, 22.9% 91.3%, 47.4% 91.3%, 54.0% 79.0%, 38.0% 59.6%, 43.9% 46.4%, 45.2% 35.5%, 50.9% 37.6%, 56.1% 36.8%, 59.8% 47.6%, 70.3% 61.9%, 87.7% 56.0%, 96.4% 37.4%, 88.6% 15.1%, 63.7% 16.7%, 55.2% 33.6%, 55.9% 36.6%, 50.9% 37.2%);
-       --offset:180deg;
-       --speed: 6000ms;
-       --background: linear-gradient( cyan, blue, green, purple, cyan);
-       "></div>
+<div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
 </div>
 </body>
 </html>
